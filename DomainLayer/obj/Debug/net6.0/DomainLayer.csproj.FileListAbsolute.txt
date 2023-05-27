@@ -1,0 +1,12 @@
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.AssemblyReference.cache
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfoInputs.cache
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfo.cs
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.CoreCompileInputs.cache
+F:\Clinic BackEnd\DentClinic\DomainLayer\bin\Debug\net6.0\DomainLayer.deps.json
+F:\Clinic BackEnd\DentClinic\DomainLayer\bin\Debug\net6.0\DomainLayer.dll
+F:\Clinic BackEnd\DentClinic\DomainLayer\bin\Debug\net6.0\DomainLayer.pdb
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
+F:\Clinic BackEnd\DentClinic\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll

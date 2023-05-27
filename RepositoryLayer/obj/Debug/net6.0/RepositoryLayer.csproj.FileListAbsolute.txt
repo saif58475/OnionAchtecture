@@ -1,0 +1,17 @@
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.deps.json
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.runtimeconfig.json
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.dll
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.pdb
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\DomainLayer.dll
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\bin\Debug\net6.0\DomainLayer.pdb
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.AssemblyReference.cache
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfoInputs.cache
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfo.cs
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CoreCompileInputs.cache
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CopyComplete
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.dll
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\refint\RepositoryLayer.dll
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.pdb
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.genruntimeconfig.cache
+F:\Clinic BackEnd\DentClinic\RepositoryLayer\obj\Debug\net6.0\ref\RepositoryLayer.dll
