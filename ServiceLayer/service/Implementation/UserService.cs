@@ -1,10 +1,14 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.DbContextLayer;
 using ServiceLayer.service.Contract;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,8 +17,10 @@ namespace ServiceLayer.service.Implementation
     public class UserService : IUser
     {
         private readonly ApplicationDbContext _context;
-        public UserService(ApplicationDbContext context)
+        public IConfiguration _configration;
+        public UserService(IConfiguration configuration, ApplicationDbContext context)
         {
+            this._configration = configuration;
             this._context = context;
         }
         public string AddUser(User user)
@@ -78,5 +84,45 @@ namespace ServiceLayer.service.Implementation
                 return ex.Message;
             }
         }
+
+
+        public string Login(LoginUserDto dto)
+        {
+            
+            var record = this._context.users.Where(u => u.email == dto.email && u.Password == dto.password).FirstOrDefault();
+            if (record == null)
+            {
+                return  "Failed To Login";
+            }
+            else
+            {
+                return GENERATEJSONWEBTOKEN(dto.email, record.Id);
+            }
+        }
+
+        public string GENERATEJSONWEBTOKEN(string username, int id)
+        {
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.UniqueName,username),
+                new Claim(JwtRegisteredClaimNames.Sub,id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+            var token = new JwtSecurityToken(
+                issuer: _configration["Jwt:Issuer"],
+                audience: _configration["Jwt:Issuer"],
+                claims,
+                expires: DateTime.Now.AddDays(2),
+                signingCredentials: credentials);
+            var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return encodeToken;
+
+
+        }
+
+       
     }
 }

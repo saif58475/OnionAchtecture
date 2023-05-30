@@ -1,11 +1,13 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.service.Contract;
 
 namespace DentClinic.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -17,28 +19,28 @@ namespace DentClinic.Controllers
         }
 
         [HttpGet]
-        [Route("api/User/GetUserById")]
+        [Route("GetUserById")]
         public User GetBYId(int id)
         {
             var record = this._user.GetById(id);
             return record;
         }
         [HttpGet]
-        [Route("api/User/GetAllUsers")]
+        [Route("GetAllUsers")]
         public List<User> GetAllRecords()
         {
             var records = this._user.GetAllRecords();
             return records;
         }
         [HttpPost]
-        [Route("api/User/CreateUser")]
+        [Route("CreateUser")]
         public User CreateUser(User user)
         {
             this._user.AddUser(user);
             return user;
         }
         [HttpPut]
-        [Route("api/User/UpdateUser")]
+        [Route("UpdateUser")]
         public User UpdateUSer(User user)
         {
             this._user.UpdateUser(user);
@@ -50,6 +52,13 @@ namespace DentClinic.Controllers
         {
             this._user.Delete(id);
             return "Deleted Successfully";
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Login")]
+        public string Login(LoginUserDto dto)
+        {
+            return this._user.Login(dto);
         }
     }
 }

@@ -17,5 +17,6 @@ namespace RepositoryLayer.DbContextLayer
 
         public DbSet<User> users { get; set; }
         public DbSet<Dentist> dentists { get; set; }
+        public DbSet<Instrument> instruments { get; set; }
     }
 }

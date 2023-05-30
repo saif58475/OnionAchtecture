@@ -1,4 +1,5 @@
-﻿using DomainLayer.Model;
+﻿using DomainLayer.Dtos;
+using DomainLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,6 @@ namespace ServiceLayer.service.Contract
         string UpdateUser(User user);
         //delete specific record
         string Delete(int id);
+        string Login(LoginUserDto dto);
     }
 }
