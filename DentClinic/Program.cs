@@ -65,6 +65,8 @@ builder.Services.AddScoped<IUser, UserService>();
 builder.Services.AddScoped<IDentist, DentistService>();
 builder.Services.AddScoped<IInstrument, InstrumentService>();
 builder.Services.AddScoped<IMachine, MachineService>();
+builder.Services.AddScoped<ICase, CaseService>();
+builder.Services.AddScoped<IConsumber, ConsumberService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

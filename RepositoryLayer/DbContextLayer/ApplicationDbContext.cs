@@ -19,5 +19,7 @@ namespace RepositoryLayer.DbContextLayer
         public DbSet<Dentist> dentists { get; set; }
         public DbSet<Instrument> instruments { get; set; }
         public DbSet<Machine> machines { get; set; }
+        public DbSet<Case> Cases { get; set; }
+        public DbSet<Consumber> Consumbers { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace DentClinic.Controllers
         }
         [HttpGet]
         [Route("GetAllInstruments")]
-        public List<Instrument> GetAllInstruments()
+        public  List<Instrument> GetAllInstruments()
         {
             return this.instrument.GetAllInstruments();
         }
@@ -31,7 +31,7 @@ namespace DentClinic.Controllers
         }
         [HttpPost]
         [Route("Create")]
-        public Instrument Create(CreateInstrumentDto dto)
+        public Instrument Create([FromForm] CreateInstrumentDto dto)
         {
             return this.instrument.Create(dto);
         }

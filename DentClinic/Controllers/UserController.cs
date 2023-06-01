@@ -47,7 +47,7 @@ namespace DentClinic.Controllers
             return user;
         }
         [HttpDelete]
-        [Route("api/User/DeleteUser")]
+        [Route("DeleteUser")]
         public string DeleteUser(int id)
         {
             this._user.Delete(id);

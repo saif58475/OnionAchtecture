@@ -12,7 +12,7 @@ namespace ServiceLayer.service.Contract
     {
         List<Machine> GetAllMAchines();
         Machine GetById(int id);
-        CreateMachineDto Create(CreateMachineDto dto);
+        Machine Create(CreateMachineDto dto);
         Machine Update(Machine dto);
         Machine Delete(int id);
     }

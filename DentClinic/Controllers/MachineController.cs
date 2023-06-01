@@ -31,7 +31,7 @@ namespace DentClinic.Controllers
         }
         [HttpPost]
         [Route("Create")]
-        public CreateMachineDto Create(CreateMachineDto dto)
+        public Machine Create([FromForm] CreateMachineDto dto)
         {
             return this._imachine.Create(dto);
         }

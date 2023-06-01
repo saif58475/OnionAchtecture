@@ -20,14 +20,14 @@ namespace ServiceLayer.service.Implementation
 
         public Instrument Create(CreateInstrumentDto dto)
         {
-            //FileInfo imgFileInfo = new FileInfo(dto.Image);
-            //string imgpath = Guid.NewGuid().ToString() + imgFileInfo.Extension;
-            //string path = Path.Combine("Images", imgpath);
-            //using (Stream stream = new FileStream(path, FileMode.Create))
-            //{
-            //    dto.Image.CopyTo(stream);
-            //};
-            var record = new Instrument() { Name = dto.Name, Quantity = dto.Quantity , Image = "null"};
+            FileInfo imgFileInfo = new FileInfo(dto.Image.FileName);
+            string imgpath = Guid.NewGuid().ToString() + imgFileInfo.Extension;
+            string path = Path.Combine("F:/Clinic BackEnd/DentClinic/DentClinic/assets/Images/Instruments", imgpath);
+            using (Stream stream = new FileStream(path, FileMode.Create))
+            {
+                dto.Image.CopyTo(stream);
+            };
+            var record = new Instrument() { Name = dto.Name, Quantity = dto.Quantity , Image = path};
             this.context.instruments.Add(record);
             this.context.SaveChanges();
             return record;
@@ -56,6 +56,15 @@ namespace ServiceLayer.service.Implementation
         {
             var record = this.context.instruments.FirstOrDefault(r => r.Id == tool.Id);
             record.Name = tool.Name; record.Quantity = tool.Quantity;
+            //if (tool.Image != null)
+            //{
+            //    string imgpath = record.Image;
+            //    string path = Path.Combine("F:/Clinic BackEnd/DentClinic/DentClinic/assets/Images/Instruments", imgpath);
+            //    using (Stream stream = new FileStream(record.Image, FileMode.Create))
+            //    {
+            //        tool.Image.CopyTo(stream);
+            //    };
+            //}
             this.context.instruments.Update(record);
             this.context.SaveChanges();
             return record;
