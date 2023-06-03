@@ -12,15 +12,15 @@ namespace ServiceLayer.service.Contract
     public interface IInstrument
     {
         //get all instruments
-        List<Instrument> GetAllInstruments();
+        Response<List<Instrument>> GetAllInstruments();
         //create instrument
-        Instrument Create(CreateInstrumentDto dto);
+        Response<Instrument> Create(CreateInstrumentDto dto);
         //get by id
-        Instrument GetById(int id);
+        Response<Instrument> GetById(int id);
         //update instrument
-        Instrument Update(Instrument tool);
+        Response<Instrument> Update(Instrument tool);
         //delete the record
-        Instrument Delete(int id);
+        Response<Instrument> Delete(int id);
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using ServiceLayer.service.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace ServiceLayer.service.Contract
 {
     public interface IMachine
     {
-        List<Machine> GetAllMAchines();
-        Machine GetById(int id);
-        Machine Create(CreateMachineDto dto);
-        Machine Update(Machine dto);
-        Machine Delete(int id);
+        Response<List<Machine>> GetAllMAchines();
+        Response<Machine> GetById(int id);
+        Response<Machine> Create(CreateMachineDto dto);
+        Response<Machine> Update(Machine dto);
+        Response<Machine> Delete(int id);
     }
 }
