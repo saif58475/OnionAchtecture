@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using ServiceLayer.service.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,14 @@ namespace ServiceLayer.service.Contract
     public interface IDentist
     {
         //get dentist by id 
-        Dentist GetById(int id);
+        Response<Dentist> GetById(int id);
         //get all the dentists
-        List<Dentist> GetAllDentists();
+        Response<List<Dentist>> GetAllDentists();
         //Create a dentist
-        CreateDentistDto AddDentist(CreateDentistDto dentist);
+        Response<Dentist> AddDentist(CreateDentistDto dentist);
         //update dentist
-        Dentist UpdateDentist(Dentist dentist);
+        Response<Dentist> UpdateDentist(Dentist dentist);
         //delete specific record
-        Dentist Delete(int id);
+        Response<Dentist> Delete(int id);
     }
 }

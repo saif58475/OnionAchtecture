@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.service.Contract;
+using ServiceLayer.service.Implementation;
 
 namespace DentClinic.Controllers
 {
@@ -19,38 +20,35 @@ namespace DentClinic.Controllers
         }
         [HttpGet]
         [Route("GetAllDentists")]
-        public List<Dentist> GetAllDetists()
+        public Response<List<Dentist>> GetAllDetists()
         {
            var records = this._dentist.GetAllDentists();
             return records;
         }
         [HttpGet]
         [Route("GetById")]
-        public Dentist GetById(int id)
+        public Response<Dentist> GetById(int id)
         {
             var record = this._dentist.GetById(id);
             return record;
         }
         [HttpPost]
         [Route("Create")]
-        public CreateDentistDto CreateDentist(CreateDentistDto dentist)
-        {
-            this._dentist.AddDentist(dentist);
-            return dentist;
+        public Response<Dentist> CreateDentist(CreateDentistDto dentist)
+        {  
+            return this._dentist.AddDentist(dentist);
         }
         [HttpPut]
         [Route("Update")]
-        public Dentist Update(Dentist dentist)
+        public Response<Dentist> Update(Dentist dentist)
         {
-           var record = this._dentist.UpdateDentist(dentist);
-            return record;
+            return this._dentist.UpdateDentist(dentist);
         }
         [HttpDelete]
         [Route("Delete")]
-        public string Delete(int id)
+        public Response<Dentist> Delete(int id)
         {
-            this._dentist.Delete(id);
-            return "Deleted Successfully";
+            return this._dentist.Delete(id);
         }
      }
 }

@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using ServiceLayer.service.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ServiceLayer.service.Contract
 {
     public interface ICase
     {
-        List<Case> GetAllCases();
-        Case Create(CreateCaseDto dto);
-        Case Update(Case dto);
-        Case GetById(int id);
-        Case Delete(int id);
+        Response<List<Case>> GetAllCases();
+        Response<Case> Create(CreateCaseDto dto);
+        Response<Case> Update(Case dto);
+        Response<Case> GetById(int id);
+        Response<Case> Delete(int id);
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using ServiceLayer.service.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace ServiceLayer.service.Contract
 {
     public interface IConsumber
     {
-        List<Consumber> GetAllConsumbers();
-        Consumber Create(CreateConsumberDto dto);
-        Consumber GetById(int id);
-        Consumber Update(Consumber rec);
-        Consumber Delete(int id);
+        Response<List<Consumber>> GetAllConsumbers();
+        Response<Consumber> Create(CreateConsumberDto dto);
+        Response<Consumber> GetById(int id);
+        Response<Consumber> Update(Consumber rec);
+        Response<Consumber> Delete(int id);
     }
 }
