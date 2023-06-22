@@ -14,7 +14,7 @@ namespace ServiceLayer.service.Contract
         Response<List<Machine>> GetAllMAchines();
         Response<Machine> GetById(int id);
         Response<Machine> Create(CreateMachineDto dto);
-        Response<Machine> Update(Machine dto);
+        Response<Machine> Update(UpdateMachineDto dto);
         Response<Machine> Delete(int id);
     }
 }

@@ -18,7 +18,7 @@ namespace ServiceLayer.service.Contract
         //get by id
         Response<Instrument> GetById(int id);
         //update instrument
-        Response<Instrument> Update(Instrument tool);
+        Response<Instrument> Update(UpdateInstrumentDto tool);
         //delete the record
         Response<Instrument> Delete(int id);
 

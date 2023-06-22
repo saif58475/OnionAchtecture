@@ -38,7 +38,7 @@ namespace DentClinic.Controllers
         }
         [HttpPut]
         [Route("Update")]
-        public Response<Instrument> Update(Instrument record)
+        public Response<Instrument> Update([FromForm] UpdateInstrumentDto record)
         {
             return this.instrument.Update(record);
         }

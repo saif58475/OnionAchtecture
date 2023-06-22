@@ -21,5 +21,6 @@ namespace RepositoryLayer.DbContextLayer
         public DbSet<Machine> machines { get; set; }
         public DbSet<Case> Cases { get; set; }
         public DbSet<Consumber> Consumbers { get; set; }
+        public DbSet<RelatedDisease> RelatedDiseases { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ServiceLayer.service.Implementation
 {
     public class InstrumentService : IInstrument
@@ -26,7 +27,7 @@ namespace ServiceLayer.service.Implementation
             {
                 FileInfo imgFileInfo = new FileInfo(dto.Image.FileName);
                 string imgpath = Guid.NewGuid().ToString() + imgFileInfo.Extension;
-                string path = Path.Combine("F:/Clinic BackEnd/DentClinic/DentClinic/assets/Images/Instruments", imgpath);
+                string path = Path.Combine("assets/Images/Instruments", imgpath);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     dto.Image.CopyTo(stream);
@@ -87,21 +88,19 @@ namespace ServiceLayer.service.Implementation
             return responce;
         }
 
-        public Response<Instrument> Update(Instrument tool)
+        public Response<Instrument> Update(UpdateInstrumentDto tool)
         {
             try
             {
                 var record = this.context.instruments.FirstOrDefault(r => r.Id == tool.Id);
                 record.Name = tool.Name; record.Quantity = tool.Quantity;
-                //if (tool.Image != null)
-                //{
-                //    string imgpath = record.Image;
-                //    string path = Path.Combine("F:/Clinic BackEnd/DentClinic/DentClinic/assets/Images/Instruments", imgpath);
-                //    using (Stream stream = new FileStream(record.Image, FileMode.Create))
-                //    {
-                //        tool.Image.CopyTo(stream);
-                //    };
-                //}
+                if (tool.Image != null)
+                {
+                    using (Stream stream = new FileStream(record.Image, FileMode.Create))
+                    {
+                        tool.Image.CopyTo(stream);
+                    };
+                }
                 this.context.instruments.Update(record);
                 this.context.SaveChanges();
                 this.responce.Message = "Success"; this.responce.MessageCode = StatusCodes.Status200OK; this.responce.Data = record; this.responce.Success = true;

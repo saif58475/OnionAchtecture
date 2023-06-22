@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using ServiceLayer.service.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,17 @@ namespace ServiceLayer.service.Contract
 {
     public interface IUser
     {
-        //getallrecords
-        List<User> GetAllRecords();
+        //Get All Records
+        Response<List<User>> GetAllRecords();
         //get record by id 
-        User GetById(int id);
+        Response<User> GetById(int id);
         //add new record
-        string AddUser(User user);
+        Response<User> AddUser(CreateUserDto user);
         //update specific record
-        string UpdateUser(User user);
+        Response<User> UpdateUser(User user);
         //delete specific record
-        string Delete(int id);
-        string Login(LoginUserDto dto);
+        Response<User> Delete(int id);
+        //this is login and get token
+        Response<LoginResponceDto> Login(LoginUserDto dto);
     }
 }

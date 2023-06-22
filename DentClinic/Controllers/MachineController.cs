@@ -38,7 +38,7 @@ namespace DentClinic.Controllers
         }
         [HttpPut]
         [Route("Update")]
-        public Response<Machine> Update(Machine record)
+        public Response<Machine> Update([FromForm] UpdateMachineDto record)
         {
             return this._imachine.Update(record);
         }

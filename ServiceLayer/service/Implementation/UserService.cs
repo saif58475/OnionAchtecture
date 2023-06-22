@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Dtos;
 using DomainLayer.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.DbContextLayer;
@@ -10,7 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;   
 
 namespace ServiceLayer.service.Implementation
 {
@@ -18,56 +19,92 @@ namespace ServiceLayer.service.Implementation
     {
         private readonly ApplicationDbContext _context;
         public IConfiguration _configration;
+        Response<User> responce = new Response<User>();
         public UserService(IConfiguration configuration, ApplicationDbContext context)
         {
             this._configration = configuration;
             this._context = context;
         }
-        public string AddUser(User user)
+        public Response<User> AddUser(CreateUserDto user)
         {
             try
             {
-                var record = new User();
-                record.Name = user.Name;
-                record.email = user.email;
-                record.Password = user.Password;
+                var record = new User() { Name = user.Name, email = user.email, Password = user.Password};
                 this._context.users.Add(record);
                 this._context.SaveChanges();
-                return "Success";
+                this.responce.Message = "Success";
+                this.responce.MessageCode = StatusCodes.Status200OK;
+                this.responce.Data = record;
+                this.responce.Success = true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                this.responce.Message = ex.Message;
+                this.responce.MessageCode = StatusCodes.Status400BadRequest;
+                this.responce.Data = null;
+                this.responce.Success = false;
             }
+            return this.responce;
         }
-
-        public string Delete(int id)
+        public Response<User> Delete(int id)
         {
             try
             {
                 var record = this._context.users.Where(r => r.Id == id).FirstOrDefault();
                 this._context.users.Remove(record);
                 this._context.SaveChanges();
-                return "Success";
+                this.responce.Message = "Success";
+                this.responce.MessageCode = StatusCodes.Status200OK;
+                this.responce.Data = record;
+                this.responce.Success = true;
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                this.responce.Message = ex.Message;
+                this.responce.MessageCode = StatusCodes.Status400BadRequest;
+                this.responce.Data = null;
+                this.responce.Success = true;
             }
+            return this.responce;
         }
-
-        public List<User> GetAllRecords()
+        public Response<List<User>> GetAllRecords()
         {
-            return this._context.users.ToList();
+            Response<List<User>> responce = new Response<List<User>>();
+            try
+            {
+                responce.Message = "Success";
+                responce.MessageCode = StatusCodes.Status200OK;
+                responce.Data = this._context.users.ToList();
+                responce.Success = true;
+            }
+            catch (Exception ex)
+            {
+                responce.Message = ex.Message;
+                responce.MessageCode = StatusCodes.Status400BadRequest;
+                responce.Data = null;
+                responce.Success = false;
+            }
+            return responce;
         }
-
-        public User GetById(int id)
+        public Response<User> GetById(int id)
         {
-            var record = this._context.users.FirstOrDefault(r => r.Id == id);
-            return record;
+            try
+            {
+                this.responce.Message = "Success";
+                this.responce.MessageCode = StatusCodes.Status200OK;
+                this.responce.Data = this._context.users.FirstOrDefault(r => r.Id == id);
+                this.responce.Success = true;
+            }
+            catch (Exception ex)
+            {
+                this.responce.Message = ex.Message;
+                this.responce.MessageCode = StatusCodes.Status400BadRequest;
+                this.responce.Data = null;
+                this.responce.Success = false;
+            }
+            return this.responce;
         }
-
-        public string UpdateUser(User user)
+        public Response<User> UpdateUser(User user)
         {
             try
             {
@@ -77,32 +114,43 @@ namespace ServiceLayer.service.Implementation
                 record.email = user.email;
                 this._context.users.Update(record);
                 this._context.SaveChanges();
-                return "Success";
+                this.responce.Message = "Success";
+                this.responce.MessageCode = StatusCodes.Status202Accepted;
+                this.responce.Data = record;
+                this.responce.Success = true;
             }
             catch(Exception ex)
             {
-                return ex.Message;
+                this.responce.Message = "Success";
+                this.responce.MessageCode = StatusCodes.Status400BadRequest;
+                this.responce.Data = null;
+                this.responce.Success = true;
             }
+            return this.responce;
         }
-
-
-        public string Login(LoginUserDto dto)
+        public Response<LoginResponceDto> Login(LoginUserDto dto)
         {
-            
             var record = this._context.users.Where(u => u.email == dto.email && u.Password == dto.password).FirstOrDefault();
+            Response<LoginResponceDto> responce = new Response<LoginResponceDto>();
             if (record == null)
             {
-                return  "Failed To Login";
+                responce.Message = "Their is no user with this email";
+                responce.MessageCode = 200;
+                responce.Data = null;
+                responce.Success = true;
             }
             else
             {
-                return GENERATEJSONWEBTOKEN(dto.email, record.Id);
+                LoginResponceDto tok = new LoginResponceDto() { token = GENERATEJSONWEBTOKEN(dto.email, record.Id) };
+                responce.Message = "Success";
+                responce.MessageCode = 200;
+                responce.Data = tok;
+                responce.Success = true;
             }
+            return responce;
         }
-
         public string GENERATEJSONWEBTOKEN(string username, int id)
         {
-
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
@@ -119,10 +167,6 @@ namespace ServiceLayer.service.Implementation
                 signingCredentials: credentials);
             var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodeToken;
-
-
         }
-
-       
     }
 }

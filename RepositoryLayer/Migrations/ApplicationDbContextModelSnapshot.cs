@@ -134,6 +134,25 @@ namespace RepositoryLayer.Migrations
                     b.ToTable("machines");
                 });
 
+            modelBuilder.Entity("DomainLayer.Model.RelatedDisease", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RelatedDiseases");
+                });
+
             modelBuilder.Entity("DomainLayer.Model.User", b =>
                 {
                     b.Property<int>("Id")

@@ -25,7 +25,7 @@ namespace ServiceLayer.service.Implementation
             {
                 FileInfo imgFileInfo = new FileInfo(dto.Image.FileName);
                 string imgpath = Guid.NewGuid().ToString() + imgFileInfo.Extension;
-                string path = Path.Combine("F:/Clinic BackEnd/DentClinic/DentClinic/assets/Images/Machines", imgpath);
+                string path = Path.Combine("assets/Images/Machines", imgpath);
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     dto.Image.CopyTo(stream);
@@ -86,12 +86,19 @@ namespace ServiceLayer.service.Implementation
             return responce;
         }
 
-        public Response<Machine> Update(Machine dto)
+        public Response<Machine> Update(UpdateMachineDto dto)
         {
             try
             {
                 var record = this._context.machines.FirstOrDefault(r => r.Id == dto.Id);
                 record.Name = dto.Name; record.Quantity = dto.Quantity;
+                if ( record.Image != null)
+                {
+                    using (Stream stream = new FileStream(record.Image, FileMode.Create))
+                    {
+                        dto.Image.CopyTo(stream);
+                    };
+                }
                 this._context.machines.Update(record);
                 this._context.SaveChanges();
                 this.responce.Message = "Success"; this.responce.MessageCode = StatusCodes.Status200OK; this.responce.Data = record; this.responce.Success = true;

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.service.Contract;
+using ServiceLayer.service.Implementation;
 
 namespace DentClinic.Controllers
 {
@@ -20,43 +21,38 @@ namespace DentClinic.Controllers
 
         [HttpGet]
         [Route("GetUserById")]
-        public User GetBYId(int id)
+        public Response<User> GetById(int id)
         {
-            var record = this._user.GetById(id);
-            return record;
+            return this._user.GetById(id);
         }
         [HttpGet]
         [Route("GetAllUsers")]
-        public List<User> GetAllRecords()
+        public Response<List<User>> GetAllRecords()
         {
-            var records = this._user.GetAllRecords();
-            return records;
+            return this._user.GetAllRecords();
         }
         [HttpPost]
         [Route("CreateUser")]
-        public User CreateUser(User user)
+        public Response<User> CreateUser(CreateUserDto user)
         {
-            this._user.AddUser(user);
-            return user;
+            return this._user.AddUser(user);
         }
         [HttpPut]
         [Route("UpdateUser")]
-        public User UpdateUSer(User user)
+        public Response<User> UpdateUser(User user)
         {
-            this._user.UpdateUser(user);
-            return user;
+            return this._user.UpdateUser(user);
         }
         [HttpDelete]
         [Route("DeleteUser")]
-        public string DeleteUser(int id)
+        public Response<User> DeleteUser(int id)
         {
-            this._user.Delete(id);
-            return "Deleted Successfully";
+            return this._user.Delete(id);
         }
         [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
-        public string Login(LoginUserDto dto)
+        public Response<LoginResponceDto> Login(LoginUserDto dto)
         {
             return this._user.Login(dto);
         }
